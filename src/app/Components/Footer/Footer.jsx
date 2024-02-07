@@ -2,8 +2,9 @@ import React from 'react'
 
 const Footer = () => {
     return (
-        <div>
-            Footer
+        <div className="flex flex-row justify-between p-4">
+            <div className="text-slate-400">Logo</div>
+            <div className="text-slate-400">Copyright@ 2024</div>
         </div>
     )
 }

@@ -3,9 +3,9 @@ import Image from 'next/image'
 
 const AboutPage = () => {
     return (
-        <div className="home flex flex-row justify-evenly">
+        <div className="home flex flex-row justify-between px-12">
 
-            <div className="left flex flex-col w-1/2 gap-8 justify-center">
+            <div className="left flex flex-col w-1/2 gap-8 justify-center pl-24">
                 <h1 className="text-indigo-800 text-3xl font-bold">About Agency</h1>
                 <div className="title gap-4 flex flex-col">
                     <h1 className="font-bold text-5xl text-textSoft">We create digital ideas</h1>

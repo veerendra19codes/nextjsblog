@@ -41,7 +41,8 @@ const postSchema = new mongoose.Schema({
         type: String,
     },
     userId: {
-        type: String,
+        type:  mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         required: true
     },
     slug: {

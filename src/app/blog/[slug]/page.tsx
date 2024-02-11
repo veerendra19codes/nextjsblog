@@ -30,40 +30,43 @@ const SingleBlogPage = async ({ params, searchParams }) => {
 
     //GETTING POSTID
     const { slug } = params;
-    console.log(params);
+    // console.log(params);
 
     //FETCHING DATA WITH API
     // const post = await getData(slug);
 
     //FETCHING DATA WITHOUT AN API
     const post = await getPost(slug);
-    console.log(post);
+    // console.log(post);
 
     return (
-        <div className="flex gap-12 justify-center items-center py-8 px-24">
-            <div className="imgContainer left w-[350px] h-[500px] relative ml-24">
-                <Image src="https://images.pexels.com/photos/3178818/pexels-photo-3178818.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="blogimg" fill className="object-cover" />
-            </div>
+        <div className="flex gap-12 justify-evenly items-center py-8 px-24">
+            {post.img && (
+                <div className="imgContainer left w-[350px] h-[500px] relative" >
+                    <Image src={post?.img ? post?.img : ""} alt="blogimg" fill className="object-cover w-auto h-auto"
+                        priority={true} />
+                </div>
+            )}
 
-            <div className="right flex flex-col justify-start gap-8 h-full">
+            <div className="right flex flex-col justify-start gap-8 h-full pr-48">
                 {post &&
                     <h1 className="font-bold text-4xl">{post?.title}</h1>
                 }
 
                 <div className="postdetails flex justify-start gap-4 h-12 ">
-                    {post.img &&
+                    {/* {post.img &&
                         <Image src={post.img} alt="authorimg" width={48} height={48} className="size-12 rounded-full" />
-                    }
+                    }  */}
 
                     <Suspense fallback={<div>Loading...</div>}>
                         {post &&
-                            <AuthorName userId={post?.id} />
+                            <AuthorName userId={post?.userId} />
                         }
                     </Suspense>
 
                     <div className="flex flex-col h-48 gap-0">
                         <h1 className="published text-md text-slate-500">Published</h1>
-                        <h1 className="publisheddate text-lg text-white">11.02.2024</h1>
+                        <h1 className="publisheddate text-lg text-white">{post.createdAt.toString().slice(4, 16)}</h1>
                     </div>
                 </div>
                 {post &&

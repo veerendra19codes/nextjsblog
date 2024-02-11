@@ -46,11 +46,11 @@ export const getPosts = async () => {
     }
 }
 
-export const getPost = async (id) => {
+export const getPost = async (slug) => {
    try{
         connectToDB();
 
-        const post = Post.findOne({_id: id});
+        const post = Post.findOne({slug});
         return post;
     }
     catch(err) {

@@ -3,16 +3,21 @@ import Link from 'next/link'
 import React from 'react'
 
 const PostCard = ({ post }) => {
+    // console.log(post.img);
+    // console.log(post.title);
+    // console.log(post.desc);
+    // console.log(post.slug);
+
     return (
         <>
             <div className="top flex justify-between items-center">
-                {
-                    post.img &&
-                    <div className="imgContainer w-5/6 h-[400px] relative">
 
-                        <Image src={post.img} alt="blogimg" fill className="object-cover" />
+                {post.img &&
+                    <div className="imgContainer w-5/6 h-[400px] relative">
+                        <Image src={post.img} alt="blogimg" fill className="object-cover" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" priority={true} />
                     </div>
                 }
+
                 <div className="-rotate-90 p-0  h-[4px] flex justify-center items-center">01.02.2024</div>
             </div>
 

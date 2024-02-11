@@ -20,7 +20,7 @@ const BlogPage = async () => {
 
     //FETCHING DATA WITHOUT AN API
     const posts = await getPosts();
-    console.log(posts);
+    // console.log(posts);
 
     return (
         <div className="flex flex-row flex-wrap gap-8 justify-center items-center w-full h-auto mt-12">

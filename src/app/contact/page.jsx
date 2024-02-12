@@ -1,5 +1,10 @@
 import Image from "next/image"
 
+export const metadata = {
+    title: "ContactPage",
+    description: "Create and Share your blogs",
+};
+
 const ContactPage = () => {
     return (
         <div className="flex flex-row justify-center items-center">

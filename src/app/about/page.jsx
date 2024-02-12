@@ -1,6 +1,12 @@
 import React from 'react'
 import Image from 'next/image'
 
+
+export const metadata = {
+    title: "AboutPage ",
+    description: "Create and Share your blogs",
+};
+
 const AboutPage = () => {
     return (
         <div className="home flex flex-row justify-between px-12">

@@ -32,7 +32,7 @@
 
 import {Post, User} from "../lib/models"
 import {connectToDB} from "../lib/connectToDB"
-
+import { unstable_noStore as noStore } from 'next/cache';
 
 export const getPosts = async () => {
     try{
@@ -73,6 +73,7 @@ export const getUsers = async () => {
 }
 
 export const getUser = async (userId) => {
+    noStore();
    try{
         connectToDB();
 

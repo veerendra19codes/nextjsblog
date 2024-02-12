@@ -3,6 +3,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation";
 import NavLink from "./NavLink/NavLink"
 import { useState } from "react";
+import { logOutWithGithub } from "../../../../lib/actions";
 
 const links = [
     {
@@ -23,11 +24,10 @@ const links = [
     },
 ]
 
-const Links = () => {
+const Links = async ({ session }) => {
     const [open, setOpen] = useState(false);
 
-
-    const session = true;
+    console.log(session);
     const isAdmin = true;
 
     return (
@@ -52,7 +52,9 @@ const Links = () => {
                         ) : (
                             ""
                         )}
-                        <button className="bg-white rounded-sm text-bgDark py-2 px-4">Logout</button>
+                        <form action={logOutWithGithub} >
+                            <button className="bg-white rounded-sm text-bgDark py-2 px-4">Logout</button>
+                        </form>
                     </>
                 ) : (
                     <NavLink item={

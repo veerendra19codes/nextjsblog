@@ -4,16 +4,36 @@ import { Suspense } from "react";
 //FETCHING DATA WITHOUT AN API I.E FETCHING FROM A SEPERATING FOLDER INSIDE PROJECT
 import { getPost } from "../../../lib/data"
 
-
 //FETCHING DATA WITH API
-// const getData = async (slug) => {
-//     const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`);
+const getData = async (slug) => {
+    const res = await fetch(`http://localhost:3000/api/blogs/${slug}`);
+
+    if (!res.ok) {
+        throw new Error("Failed to get a post");
+    }
+    return res.json();
+}
+
+// const deleteData = async (slug) => {
+//     const res = await fetch(`http://localhost:3000/api/blogs/${slug}`, { method: "DELETE" });
 
 //     if (!res.ok) {
-//         throw new Error("Something went wrong");
+//         throw new Error("Failed to delete");
 //     }
 //     return res.json();
 // }
+
+
+export const generateMetadata = async ({ params }) => {
+    const { slug } = params;
+
+    const post = await getPost(slug);
+
+    return {
+        title: post.title,
+        description: post.desc,
+    };
+};
 
 const SingleBlogPage = async ({ params, searchParams }) => {
 
@@ -33,10 +53,10 @@ const SingleBlogPage = async ({ params, searchParams }) => {
     // console.log(params);
 
     //FETCHING DATA WITH API
-    // const post = await getData(slug);
+    const post = await getData(slug);
 
     //FETCHING DATA WITHOUT AN API
-    const post = await getPost(slug);
+    // const post = await getPost(slug);
     // console.log(post);
 
     return (
@@ -70,7 +90,10 @@ const SingleBlogPage = async ({ params, searchParams }) => {
                     </div>
                 </div>
                 {post &&
-                    <div className="desc">{post?.desc}</div>
+                    <>
+                        <div className="desc">{post?.desc}</div>
+                        {/* <button onClick={() => deleteData}>Delete</button> */}
+                    </>
                 }
             </div>
         </div>

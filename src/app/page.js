@@ -1,6 +1,13 @@
+"use client"
+
 import Image from "next/image"
-const Home = () => {
+// import { SessionProvider } from "next-auth/react"
+// import type { AppProps } from "next/app"
+
+
+const Home = ({session, ...pageProps}) => {
   return (
+    //  <SessionProvider session={session}>
     <div className="home flex flex-row justify-between px-12">
 
       <div className="left flex flex-col w-1/2 gap-8 justify-center pl-24">
@@ -23,6 +30,7 @@ const Home = () => {
           <Image src="/hero.gif" alt="hero" width={450} height={450} />
       </div>
     </div>
+    //  </SessionProvider>
   )
 }
 

@@ -1,4 +1,5 @@
 "use client";
+
 import Link from "next/link"
 import { usePathname } from "next/navigation";
 import NavLink from "./NavLink/NavLink"
@@ -24,10 +25,10 @@ const links = [
     },
 ]
 
-const Links = async ({ session }) => {
+const Links = ({ session }) => {
     const [open, setOpen] = useState(false);
 
-    console.log(session);
+    // console.log(session);
     const isAdmin = true;
 
     return (

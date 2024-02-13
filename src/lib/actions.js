@@ -2,8 +2,11 @@
 
 import { revalidatePath } from "next/cache";
 import { connectToDB } from "./connectToDB";
-import { Post } from "./models";
+import { Post, User } from "./models";
 import { signIn, signOut } from "../lib/auth"
+import { connect } from "mongoose";
+import bcrypt from "bcryptjs";
+
 
 export const addPost = async (formData) => {
 
@@ -62,4 +65,71 @@ export const logOutWithGithub = async () => {
     "use server"
 
     await signOut()
+}
+
+export const registerAction = async (previousState, formData) => {
+    const {username, email, password, confirmPassword} = Object.fromEntries(formData);
+
+    // console.log(formData);
+
+    if( password !== confirmPassword) {
+        // throw new Error("Passwords do not match");
+        console.log("Passwords do not match")
+        return {error: "passwords do not match"};
+    }
+
+    try {
+        connectToDB();
+    
+        const user = await User.findOne({username});
+
+        if(user) {
+            return  {error: "Username already exists" };
+        }
+
+        const salt = await bcrypt.genSalt(10);
+const hashedPassword = await bcrypt.hash(password, salt);
+// Store hash in your password DB.
+
+        const newUser = new User({
+            username: username,
+            email: email,
+            password: hashedPassword,
+        })
+
+        // console.log(newUser);
+
+        await newUser.save();
+        console.log("User registered successfully");
+        //success is boolean because if success is true we can redirect user to home/login page
+        return {success: true};
+
+    }
+    catch(err) {
+        console.error(err);
+        // throw new Error("failed registering using user creds");
+        console.log("failed registering using user creds");
+        return { error: "failed registering using user creds"}
+    }
+
+}
+
+export const loginAction = async (previousState,formData) => {
+    const {username, password} = Object.fromEntries(formData);
+
+    try {
+        await signIn("credentials", { username, password});
+
+    }
+    catch(err) {
+        console.error(err);
+        // throw new Error("failed registering using user creds");
+        if(err.message.includes("CredentialsSignin")) {
+            return { error: "Invalid username or password"};
+        }
+        console.log("failed registering using user creds")
+        // return { error: "failed registering using user creds"}
+        throw err;
+    }
+
 }

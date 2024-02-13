@@ -6,7 +6,7 @@ import { auth } from '../../../lib/auth'
 const Navbar = async () => {
     const session = await auth();
 
-    // console.log(session);
+    console.log(session);
     return (
         <div className="flex flex-row justify-between h-18 py-4 bg-bgDark px-32 items-center sm:px-4 sm:gap-24">
             <Link href="/" className="logo">

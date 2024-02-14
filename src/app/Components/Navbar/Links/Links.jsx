@@ -29,7 +29,7 @@ const Links = ({ session }) => {
     const [open, setOpen] = useState(false);
 
     // console.log(session);
-    const isAdmin = true;
+    // const isAdmin = true;
 
     return (
 
@@ -43,7 +43,7 @@ const Links = ({ session }) => {
                 }
                 {session ? (
                     <>
-                        {isAdmin ? (
+                        {session?.user?.isAdmin ? (
                             <NavLink item={
                                 {
                                     title: "Admin",

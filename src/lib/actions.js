@@ -57,14 +57,14 @@ export const deletePost = async (formData) => {
 
 export const logInWithGithub = async () => {
     "use server"
-
     await signIn("github")
 }
 
 export const logOutWithGithub = async () => {
     "use server"
+    
 
-    await signOut()
+    await signOut();
 }
 
 export const registerAction = async (previousState, formData) => {

@@ -22,7 +22,7 @@ const Home = ({session, ...pageProps}) => {
           <button className="bg-blue-500 rounded-md p-4">Learn More</button>
           <button className="bg-white text-bgDark rounded-md p-4">Contact</button>
         </div>
-        <Image src="/brands.png" alt="brands" width={500} height={100} className="w-auto h-auto"/>
+        <Image src="/brands.png" alt="brands" width={500} height={100} className="w-auto h-auto" priority={true}/>
       </div>
 
       <div className="right w-1/2 flex justify-center items-center">

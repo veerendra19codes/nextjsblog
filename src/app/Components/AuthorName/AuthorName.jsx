@@ -24,9 +24,10 @@ const AuthorName = async ({ userId }) => {
     return (
         <div className="flex flex-row h-12 gap-4">
 
-
+            {/* src={user.img ? user?.img : "/noavatar.png"} */}
             <Image
-                src={user.img ? user?.img : "/noavatar.png"} alt="authorimg"
+                src={user?.img ?? "/noavatar.png"}
+                alt="authorimg"
                 width={48}
                 height={48} className="size-12 rounded-full w-auto h-auto"
                 priority={true}

@@ -8,7 +8,7 @@ import { connect } from "mongoose";
 import bcrypt from "bcryptjs";
 
 
-export const addPost = async (formData) => {
+export const addPost = async (prevState,formData) => {
 
     const { title, desc, slug, userId} = Object.fromEntries(formData);
 
@@ -32,6 +32,8 @@ export const addPost = async (formData) => {
         console.log("new post added to db")
         //whenever a new blog is added route and nest routes of blog will show fresh data
         revalidatePath("/blog")
+        revalidatePath("/admin")
+
     }
     catch(err) {
         console.error(err);
@@ -48,10 +50,57 @@ export const deletePost = async (formData) => {
         await Post.findByIdAndDelete(id);
         console.log("post deleted");
         revalidatePath("/blog");
+        revalidatePath("/admin")
+
     }
     catch(err) {
         console.error(err);
         return { error: "error in deleting post"}
+    }
+}
+
+
+
+export const addUser = async (prevState,formData) => {
+
+    const { username, password, img, email} = Object.fromEntries(formData);
+
+    
+
+    try {
+        connectToDB();
+
+        //this is new model Post , import it
+        const newUser = new User({
+            username, password, img, email
+        })
+
+        await newUser.save();
+        console.log("new user added to db")
+        //whenever a new blog is added route and nest routes of blog will show fresh data
+        revalidatePath("/admin")
+    }
+    catch(err) {
+        console.error(err);
+        return { error: "error in adding new user"}
+    }
+
+}
+
+
+export const deleteUser = async ( formData) => {
+    const { id } = Object.fromEntries(formData);
+
+    try {
+        connectToDB();
+        await Post.deleteMany({ userId: id })
+        await User.findByIdAndDelete(id);
+        console.log("user deleted");
+        revalidatePath("/admin");
+    }
+    catch(err) {
+        console.error(err);
+        return { error: "error in deleting user"}
     }
 }
 

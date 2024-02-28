@@ -63,7 +63,11 @@ const SingleBlogPage = async ({ params, searchParams }) => {
         <div className="flex gap-12 justify-evenly items-center py-8 px-24">
             {post.img && (
                 <div className="imgContainer left w-[350px] h-[500px] relative" >
-                    <Image src={post?.img ? post?.img : ""} alt="blogimg" fill className="object-cover w-auto h-auto"
+                    {/* src={post?.img ? post?.img : ""}  */}
+                    <Image
+                        src={post?.img && ""}
+                        alt="blogimg" fill
+                        className="object-cover w-auto h-auto"
                         priority={true} />
                 </div>
             )}
